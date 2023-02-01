@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Notifications page</title>
+  <link rel="shortcut icon" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header__title">
+        Notifications <span class="header__counter_read" >{{notificationsRead}}</span>
+      </h1>
+      <a class="header__btn_as_read" @click="markAllAsRead">
+        Mark all as read
+      </a>
+    </header>
+
+    <!-- Notification -->
+    <notification-component
+      v-for="notification in notifications"
+      :name="notification.userName"
+      :read="notification.read"
+      :date="notification.date"
+      :business="notification.business"
+      @click="readNotification( notification.userName )"
+
+    ></notification-component>
+
+  </main>
+
+
+  <!-- Notification Template -->
+  <script type="text/x-template" id="notification-template">
+    <article class="notification"
+              :class="{ 'notification--noread': !read }"
+    >
+      <figure class="notification--avatar--container">
+        <img  class="notification--avatar--image" :src=" `./assets/images/avatar-${ getUrlImg(name) }.webp`" alt="name">
+      </figure>
+
+      <div class="notification__body">
+        <p>
+          <strong> <a href="#">{{name}}</a> </strong>
+          {{ business.title }}
+          <strong><a href="#" v-if="business.subject">{{ business.subject }}</a></strong> 
+          <span v-show="!read"></span>
+        </p>
+        <p>{{date}}</p>
+      </div>
+
+      <p class="notification--message" v-if="business.message">
+        {{ business.message }}
+      </p>
+
+      <figure class="notification--picture" v-if="business.imgURL">
+        <img :src=" `./assets/images/${ getUrlImg(business.imgURL) }.webp` " alt="">
+      </figure>
+
+    </article>
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
