@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Time tracking dashboard</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  </style>
+</head>
+<body>
+
+  <main>
+
+    <section class="user_box">
+      <article class="user_box__introduction">
+        <figure><img src="./images/image-jeremy.png" alt=""></figure>
+        <div>
+          <p>report for</p>
+          <h2>{{userName}}</h2>
+        </div>
+      </article>
+      <div class="changers">
+        <p class="pointer" @click="timeFrame = 'daily'">Daily</p>
+        <p class="pointer" @click="timeFrame = 'weekly'">Weekly</p>
+        <p class="pointer" @click="timeFrame = 'monthly'">Monthly</p>
+      </div>
+    </section>
+
+    <matter-component
+      v-for="matter in timeTracking" :key="matter"
+      :title="matter.title"
+      :timeframes="matter.timeframes[timeFrame]"
+      :chronology="timeFrame"
+
+    ></matter-component>
+
+
+
+  </main>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script type="text/x-template" id="matter-template">
+    <article class="matter_box"
+    >
+      <figure       :class="{ 
+        'work': title=='Work', 
+        'study': title=='Study',
+        'social': title=='Social',
+        'self-care': title=='Self Care',
+        'play': title=='Play',
+        'exercise': title=='Exercise',
+        
+      }">
+        <img :src="`./images/icon-${clearUrlImg(title)}.svg`" alt="">
+      </figure>
+      <div class="matter_box__details pointer">
+        <div class="matter_box__details--header">
+          <p> {{ title }} </p>
+          
+          <img class="pointer" src="./images/icon-ellipsis.svg" alt="" >
+        </div>
+
+        <div class="timeWorked">
+          <p class="matter_box__details--time">{{ timeframes.current }}hrs</p>
+          <p class="matter_box__details--last-time">Last  {{chronology}} - {{ timeframes.previous }}hrs</p>
+        </div>
+      </div>   
+    
+    </article>
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 
 In this challenge I implemented a vue solution using CDNJS. The objective is to make a component that allows Distinguishing between "unread" and "read" notifications using the basic tools of VueJs.
 
-[Codepen solution](https://codepen.io/d4ndres/pen/JjBmvOm)
+[Project result](https://01-notifications-page.vercel.app/)
 
 ## Frontend Mentor - Notifications page - challenge 01
 
