@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search githubs Users</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <section class="container_magic" 
+                :class="{'container_magic__user_finded' : result }"
+                >
+            <article class="container_search">
+                <h2>Search GitHub's Users</h2>
+                <form v-on:submit.prevent>
+                    <input v-model="searchUser" type="text" required>
+                    <input v-on:click="doSearch" type="submit" value="Buscar">
+                </form>
+            </article>
+
+            <div>    
+                <article v-if="result" class="container_result">
+                    <div class="container_result__favorite">
+                        <button @click="removeFavorite" v-if="isFavorite" >⭐Remove to favorite</button>
+                        <button @click="addFavorite" v-else >⭐Add to favorite</button>
+                    </div>
+                    <div class="card">
+                        <div class="container_result__img">
+                            <img :src="result.avatar_url" :alt="result.login">
+                        </div>
+                        <div class="container_result__description">
+                            <h4>{{ result.login }}</h4>
+                            <p>{{ result.bio }}</p>
+                        </div>
+                    </div>
+                </article>
+                <article v-else-if="error" class="container_result" >
+                    <h4>{{ error }}</h4>
+                </article>
+            </div>
+        </section>       
+                
+        <div 
+            class="container_img"
+            :class="{'container_img__selected' : checkFavorite(favorite)}"
+            v-for="favorite in allFavorites" 
+            @click="showFavorite(favorite)" 
+            :key="favorite">
+
+            <img :src="favorite.avatar_url" :alt="favorite.login">
+        </div>
+            
+    </main>    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
