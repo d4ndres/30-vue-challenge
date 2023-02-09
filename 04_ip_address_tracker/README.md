@@ -8,7 +8,7 @@ Diseño responsivo he implementacion de Apis publicas.
 
 ## Ip Address Tracker
 
-![Design preview for the IP address tracker coding challenge](./mydesign/desktop-preview.jpg)
+![Design preview for the IP address tracker coding challenge](./mydesign/desktop-preview.png)
 
 ### Project setup
 ```
